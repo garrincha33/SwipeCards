@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1B3DB8DD219F20DD008F7BA1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3DB8DC219F20DD008F7BA1 /* User.swift */; };
 		1B3DB8E0219F4C1D008F7BA1 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3DB8DF219F4C1D008F7BA1 /* CardViewModel.swift */; };
+		1B3DB8E2219F5EC5008F7BA1 /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3DB8E1219F5EC5008F7BA1 /* Advertiser.swift */; };
 		1BB027F8219C2C9B0095F0E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB027F7219C2C9B0095F0E1 /* AppDelegate.swift */; };
 		1BB027FA219C2C9B0095F0E1 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB027F9219C2C9B0095F0E1 /* HomeController.swift */; };
 		1BB027FD219C2C9B0095F0E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BB027FB219C2C9B0095F0E1 /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		1B3DB8DC219F20DD008F7BA1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1B3DB8DF219F4C1D008F7BA1 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
+		1B3DB8E1219F5EC5008F7BA1 /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
 		1BB027F4219C2C9B0095F0E1 /* SwipeCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwipeCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BB027F7219C2C9B0095F0E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BB027F9219C2C9B0095F0E1 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				1B3DB8DC219F20DD008F7BA1 /* User.swift */,
+				1B3DB8E1219F5EC5008F7BA1 /* Advertiser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 			files = (
 				1BB027FA219C2C9B0095F0E1 /* HomeController.swift in Sources */,
 				1BB027F8219C2C9B0095F0E1 /* AppDelegate.swift in Sources */,
+				1B3DB8E2219F5EC5008F7BA1 /* Advertiser.swift in Sources */,
 				1BB02834219C54750095F0E1 /* HomeButtonControlsStackView.swift in Sources */,
 				1BB0280A219C36880095F0E1 /* Extensions+UIView.swift in Sources */,
 				1B3DB8E0219F4C1D008F7BA1 /* CardViewModel.swift in Sources */,
