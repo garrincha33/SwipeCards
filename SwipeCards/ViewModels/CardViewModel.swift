@@ -12,13 +12,10 @@ protocol ProducesCardViewModel {
     func toCardViewModel() -> CardViewModel
 }
 
-
 struct CardViewModel {
-
-    let imageName: String
+    let imageNames: [String]
     let attributedString: NSAttributedString
     let textAlignment: NSTextAlignment
- 
 }
 
 
