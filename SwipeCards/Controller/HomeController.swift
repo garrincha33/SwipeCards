@@ -23,7 +23,6 @@ class HomeController: UIViewController {
         ] as [ProducesCardViewModel]
         let viewModels = producers.map({return $0.toCardViewModel()})
         return viewModels
-
     }()
 
     override func viewDidLoad() {
@@ -34,7 +33,6 @@ class HomeController: UIViewController {
     
     //MARK:- FilePrivate
     fileprivate func setupDummyCards() {
-        
         cardViewModels.forEach { (cardViewModel) in
             let cardView = CardView(frame: .zero)
             cardView.cardViewModel = cardViewModel
@@ -49,7 +47,6 @@ class HomeController: UIViewController {
         overallStackView.axis = .vertical
         view.addSubview(overallStackView)
         overallStackView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor)
-        
         overallStackView.isLayoutMarginsRelativeArrangement = true
         overallStackView.layoutMargins = .init(top: 0, left: 12, bottom: 0, right: 12)
         overallStackView.bringSubviewToFront(cardsDeckView)
