@@ -23,6 +23,9 @@ class CardView: UIView {
                 barsStackView.addArrangedSubview(barView)
             }
             barsStackView.arrangedSubviews.first?.backgroundColor = .white
+            
+            setupImageIndexObserver()
+            
         }
     }
     
@@ -41,11 +44,19 @@ class CardView: UIView {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         addGestureRecognizer(panGesture)
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
-        
-
     }
     
-    var imageIndex = 0
+    fileprivate func setupImageIndexObserver() {
+        cardViewModel.imageIndexObserver = { [weak self] (idx, image) in
+            print("changing view model")
+            self?.imageView.image = image
+            
+            self?.barsStackView.arrangedSubviews.forEach({ (v) in
+                v.backgroundColor = self?.barDeselectedColor()
+            })
+            self?.barsStackView.arrangedSubviews[idx].backgroundColor = .white
+        }
+    }
     
     fileprivate func barDeselectedColor() -> UIColor {
         return UIColor(white: 0, alpha: 0.1)
@@ -54,21 +65,14 @@ class CardView: UIView {
     @objc fileprivate func handleTap(gesture: UITapGestureRecognizer) {
         let tapLocation = gesture.location(in: nil)
         let shouldAdvanceToNextPhoto = tapLocation.x > frame.width / 2 ? true : false
+        
         if shouldAdvanceToNextPhoto {
-            imageIndex = min(imageIndex + 1, cardViewModel.imageNames.count-1)
+            cardViewModel.gotoNextPhoto()
         } else {
-            imageIndex = max(0, imageIndex - 1)
+            cardViewModel.gotoPreviousPhoto()
         }
-        let imageName = cardViewModel.imageNames[imageIndex]
-        imageView.image = UIImage(named: imageName)
-        barsStackView.arrangedSubviews.forEach { (v) in
-            v.backgroundColor = barDeselectedColor()
-        }
-        barsStackView.arrangedSubviews[imageIndex].backgroundColor = .white
     }
-    
-    
-    
+
     fileprivate func setupGradientLayer() {
         gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
         gradient.locations = [0.6, 1]
