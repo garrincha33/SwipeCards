@@ -18,14 +18,11 @@ class TopNavigationStackView: UIStackView {
         super.init(frame: frame)
         heightAnchor.constraint(equalToConstant: 80).isActive = true
         fireImageView.contentMode = .scaleAspectFit
-        
         settingsButton.setImage(#imageLiteral(resourceName: "top_left_profile").withRenderingMode(.alwaysOriginal), for: .normal)
         messagesButton.setImage(#imageLiteral(resourceName: "top_right_messages").withRenderingMode(.alwaysOriginal), for: .normal)
-        
         [settingsButton, UIView(), fireImageView, UIView(),  messagesButton].forEach { (v) in
             addArrangedSubview(v)
         }
-        
         distribution = .equalCentering
         isLayoutMarginsRelativeArrangement = true
         layoutMargins = .init(top: 0, left: 16, bottom: 0, right: 16)

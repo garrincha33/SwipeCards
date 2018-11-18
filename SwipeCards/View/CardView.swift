@@ -19,36 +19,56 @@ class CardView: UIView {
     }
     
     private let imageView = UIImageView(image: #imageLiteral(resourceName: "lady5c"))
+    private let gradient = CAGradientLayer()
     private let informationLable = UILabel()
     
     //configurations
     let thresHold: CGFloat = 100
-    
+ 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupLayout()
+
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        addGestureRecognizer(panGesture)
+
+    }
+    fileprivate func setupGradientLayer() {
+        gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradient.locations = [0.6, 1]
+        layer.addSublayer(gradient)
+    }
+    
+    fileprivate func setupLayout() {
         layer.cornerRadius = 20
         clipsToBounds = true
-
+        
         addSubview(imageView)
         imageView.fillSuperview()
         imageView.contentMode = .scaleAspectFill
         
+        setupGradientLayer()
+        
         addSubview(informationLable)
         informationLable.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 16, right: 16))
-        informationLable.text = "Test Name Test Name Test Age"
-        informationLable.font = UIFont.systemFont(ofSize: 34, weight: .heavy)
+        
         informationLable.numberOfLines = 0
         informationLable.textColor = .white
-        
-        
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
-        addGestureRecognizer(panGesture)
-
+    }
+    
+    override func layoutSubviews() {
+        //executed when frame is drawn on load
+        gradient.frame = self.frame
     }
 
     @objc fileprivate func handlePan(gesture: UIPanGestureRecognizer) {
 
         switch gesture.state {
+        case .began:
+            //fixes bug in animation when sliding cards off, this stops them return to the view
+            superview?.subviews.forEach({ (subview) in
+                subview.layer.removeAllAnimations()
+            })
         case .changed:
             handleChanged(gesture)
         case .ended:
