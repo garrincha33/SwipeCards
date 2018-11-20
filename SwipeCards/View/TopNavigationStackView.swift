@@ -10,9 +10,9 @@ import UIKit
 
 class TopNavigationStackView: UIStackView {
     
-    let settingsButton = UIButton(type: .system)
-    let messagesButton = UIButton(type: .system)
-    let fireImageView = UIImageView(image: #imageLiteral(resourceName: "app_icon"))
+     let settingsButton = UIButton(type: .system)
+     let messagesButton = UIButton(type: .system)
+     let fireImageView = UIImageView(image: #imageLiteral(resourceName: "app_icon"))
 
     override init(frame: CGRect) {
         super.init(frame: frame)

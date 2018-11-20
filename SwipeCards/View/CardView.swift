@@ -10,6 +10,12 @@ import UIKit
 
 class CardView: UIView {
     
+    private let imageView = UIImageView(image: #imageLiteral(resourceName: "lady5c"))
+    private let gradient = CAGradientLayer()
+    private let informationLable = UILabel()
+    private let barsStackView = UIStackView()
+    private let thresHold: CGFloat = 100
+    
     var cardViewModel: CardViewModel! {
         didSet {
             let imageNames = cardViewModel.imageNames.first ?? ""
@@ -29,14 +35,6 @@ class CardView: UIView {
         }
     }
     
-    private let imageView = UIImageView(image: #imageLiteral(resourceName: "lady5c"))
-    private let gradient = CAGradientLayer()
-    private let informationLable = UILabel()
-    private let barsStackView = UIStackView()
-    
-    //configurations
-    let thresHold: CGFloat = 100
- 
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
@@ -112,7 +110,6 @@ class CardView: UIView {
     }
 
     @objc fileprivate func handlePan(gesture: UIPanGestureRecognizer) {
-
         switch gesture.state {
         case .began:
             //fixes bug in animation when sliding cards off, this stops them return to the view

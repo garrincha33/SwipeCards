@@ -9,7 +9,6 @@
 import UIKit
 
 struct User: ProducesCardViewModel {
-    
     let name: String
     let age: Int
     let profression: String

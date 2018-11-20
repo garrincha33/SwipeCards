@@ -10,12 +10,11 @@ import UIKit
 
 class HomeController: UIViewController {
 
+    private let topStackView = TopNavigationStackView()
+    private let cardsDeckView = UIView()
+    private let buttonStackView = HomeButtonControlsStackView()
     
-    let topStackView = TopNavigationStackView()
-    let cardsDeckView = UIView()
-    let buttonStackView = HomeButtonControlsStackView()
-    
-    let cardViewModels: [CardViewModel] = {
+    private let cardViewModels: [CardViewModel] = {
         let producers = [
             User(name: "Kelly", age: 23, profression: "Music DJ", imageNames: ["kelly1", "kelly2", "kelly3"]),
             User(name: "Jane", age: 18, profression: "Teacher", imageNames: ["jane1", "jane2", "jane3"]),
@@ -27,11 +26,18 @@ class HomeController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        topStackView.settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
         setupLayout()
         setupDummyCards()
     }
     
     //MARK:- FilePrivate
+    @objc fileprivate func handleSettings() {
+        print("reg page show")
+        present(RegistrationController(), animated: true, completion: nil)
+    }
+    
     fileprivate func setupDummyCards() {
         cardViewModels.forEach { (cardViewModel) in
             let cardView = CardView(frame: .zero)
