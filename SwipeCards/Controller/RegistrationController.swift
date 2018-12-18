@@ -10,7 +10,7 @@ import UIKit
 
 class RegistrationController: UIViewController {
     
-    //UI Components
+    //MARK:- UI Components
     let gradientLayer = CAGradientLayer()
     
     let selectPhotoButton: UIButton = {
@@ -30,6 +30,7 @@ class RegistrationController: UIViewController {
         tf.placeholder = "Enter Full name"
         tf.backgroundColor = .white
         tf.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        tf.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         return tf
     }()
     
@@ -38,6 +39,7 @@ class RegistrationController: UIViewController {
         tf.placeholder = "Enter Email"
         tf.backgroundColor = .white
         tf.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        tf.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         return tf
     }()
     
@@ -46,6 +48,7 @@ class RegistrationController: UIViewController {
         tf.placeholder = "Enter Password"
         tf.isSecureTextEntry = true
         tf.backgroundColor = .white
+        tf.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         return tf
     }()
     
@@ -54,14 +57,15 @@ class RegistrationController: UIViewController {
         button.setTitle("Register", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
-        button.backgroundColor = #colorLiteral(red: 0.8235294118, green: 0, blue: 0.3254901961, alpha: 1)
+//        button.backgroundColor = #colorLiteral(red: 0.8235294118, green: 0, blue: 0.3254901961, alpha: 1)
+        button.backgroundColor = .lightGray
+        button.setTitleColor(.gray, for: .normal)
+        button.isEnabled = false
         button.heightAnchor.constraint(equalToConstant: 44).isActive = true
         button.layer.cornerRadius = 22
         return button
     }()
-    
-   
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         superGradientLayer()
@@ -71,6 +75,7 @@ class RegistrationController: UIViewController {
         view.backgroundColor = .red
     }
     
+    //MARK:- Keyboard observers
     fileprivate func setupTapGesture() {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapDismiss)))
     }
@@ -106,6 +111,29 @@ class RegistrationController: UIViewController {
         self.view.transform = CGAffineTransform(translationX: 0, y: -difference - 8)
     }
     
+    //MARK:- textField recogniser
+    @objc fileprivate func handleTextChange(textField: UITextField) {
+        if textField == fullNameTextField {
+            print("Text Changed for fullname", textField.text ?? "")
+        } else if textField == emailTextField {
+            print("Text Changed for email", textField.text ?? "")
+        } else {
+            print("password Changed", textField.text ?? "")
+        }
+        
+        let isFormValid = fullNameTextField.text?.isEmpty == false && emailTextField.text?.isEmpty == false && passwordTextField.text?.isEmpty == false
+        
+        registerButton.isEnabled = isFormValid
+        
+        if isFormValid {
+            registerButton.backgroundColor = #colorLiteral(red: 0.8235294118, green: 0, blue: 0.3254901961, alpha: 1)
+            registerButton.setTitleColor(.white, for: .normal)
+        } else {
+            registerButton.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+            registerButton.setTitleColor(.darkGray, for: .normal)
+        }
+    }
+
     lazy var verticalStackView: UIStackView = {
         let sv = UIStackView(arrangedSubviews: [fullNameTextField, emailTextField, passwordTextField, registerButton])
         sv.axis = .vertical
@@ -114,6 +142,7 @@ class RegistrationController: UIViewController {
         return sv
     }()
     
+    //MARK:- UI Stackviews
     lazy var overallStackView = UIStackView(arrangedSubviews: [selectPhotoButton, verticalStackView])
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -124,6 +153,7 @@ class RegistrationController: UIViewController {
         }
     }
     
+    //MARK:- Setup layout
     fileprivate func setupLayout() {
         view.addSubview(overallStackView)
         
@@ -139,7 +169,7 @@ class RegistrationController: UIViewController {
         super.viewWillLayoutSubviews()
         gradientLayer.frame = view.bounds
     }
-    
+    //MARK:- gradientBackground
     fileprivate func superGradientLayer() {
         let topColor = #colorLiteral(red: 0.9864671826, green: 0.3463811278, blue: 0.3830411434, alpha: 1)
         let bottomColor = #colorLiteral(red: 0.8999838233, green: 0.124706693, blue: 0.4600698352, alpha: 1)

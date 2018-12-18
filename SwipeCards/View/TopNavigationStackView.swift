@@ -20,6 +20,7 @@ class TopNavigationStackView: UIStackView {
         fireImageView.contentMode = .scaleAspectFit
         settingsButton.setImage(#imageLiteral(resourceName: "top_left_profile").withRenderingMode(.alwaysOriginal), for: .normal)
         messagesButton.setImage(#imageLiteral(resourceName: "top_right_messages").withRenderingMode(.alwaysOriginal), for: .normal)
+        
         [settingsButton, UIView(), fireImageView, UIView(),  messagesButton].forEach { (v) in
             addArrangedSubview(v)
         }
