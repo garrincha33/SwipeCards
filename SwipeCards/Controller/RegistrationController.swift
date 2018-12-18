@@ -72,6 +72,7 @@ class RegistrationController: UIViewController {
         setupLayout()
         setupNotificationObservers()
         setupTapGesture()
+        setupViewModelObserver()
         view.backgroundColor = .red
     }
     
@@ -84,7 +85,7 @@ class RegistrationController: UIViewController {
         self.view.endEditing(true)
      
     }
-    
+
     fileprivate func setupNotificationObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -114,23 +115,26 @@ class RegistrationController: UIViewController {
     //MARK:- textField recogniser
     @objc fileprivate func handleTextChange(textField: UITextField) {
         if textField == fullNameTextField {
-            print("Text Changed for fullname", textField.text ?? "")
+            registrationViewModel.fullName = textField.text
         } else if textField == emailTextField {
-            print("Text Changed for email", textField.text ?? "")
+            registrationViewModel.email = textField.text
         } else {
-            print("password Changed", textField.text ?? "")
+            registrationViewModel.password = textField.text
         }
-        
-        let isFormValid = fullNameTextField.text?.isEmpty == false && emailTextField.text?.isEmpty == false && passwordTextField.text?.isEmpty == false
-        
-        registerButton.isEnabled = isFormValid
-        
-        if isFormValid {
-            registerButton.backgroundColor = #colorLiteral(red: 0.8235294118, green: 0, blue: 0.3254901961, alpha: 1)
-            registerButton.setTitleColor(.white, for: .normal)
-        } else {
-            registerButton.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-            registerButton.setTitleColor(.darkGray, for: .normal)
+    }
+    
+    let registrationViewModel = RegistrationViewModel()
+    
+    fileprivate func setupViewModelObserver() {
+        registrationViewModel.isFormValidObserver = { [unowned self] (isFormValid) in
+            self.registerButton.isEnabled = isFormValid
+            if isFormValid {
+                self.registerButton.backgroundColor = #colorLiteral(red: 0.8235294118, green: 0, blue: 0.3254901961, alpha: 1)
+                self.registerButton.setTitleColor(.white, for: .normal)
+            } else {
+                self.registerButton.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+                self.registerButton.setTitleColor(.darkGray, for: .normal)
+            }
         }
     }
 
