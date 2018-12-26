@@ -11,6 +11,7 @@
 		1B3DB8E0219F4C1D008F7BA1 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3DB8DF219F4C1D008F7BA1 /* CardViewModel.swift */; };
 		1B3DB8E2219F5EC5008F7BA1 /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3DB8E1219F5EC5008F7BA1 /* Advertiser.swift */; };
 		1B75372F21CFD84F006B7EE1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B75372E21CFD84F006B7EE1 /* GoogleService-Info.plist */; };
+		1B75373121D38EBD006B7EE1 /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B75373021D38EBD006B7EE1 /* Bindable.swift */; };
 		1BAEDABA21C8A0C500D97562 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAEDAB921C8A0C500D97562 /* RegistrationViewModel.swift */; };
 		1BB027F8219C2C9B0095F0E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB027F7219C2C9B0095F0E1 /* AppDelegate.swift */; };
 		1BB027FA219C2C9B0095F0E1 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB027F9219C2C9B0095F0E1 /* HomeController.swift */; };
@@ -31,6 +32,7 @@
 		1B3DB8DF219F4C1D008F7BA1 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		1B3DB8E1219F5EC5008F7BA1 /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
 		1B75372E21CFD84F006B7EE1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1B75373021D38EBD006B7EE1 /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		1BAEDAB921C8A0C500D97562 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		1BB027F4219C2C9B0095F0E1 /* SwipeCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwipeCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BB027F7219C2C9B0095F0E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 			children = (
 				1B3DB8DC219F20DD008F7BA1 /* User.swift */,
 				1B3DB8E1219F5EC5008F7BA1 /* Advertiser.swift */,
+				1B75373021D38EBD006B7EE1 /* Bindable.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B75373121D38EBD006B7EE1 /* Bindable.swift in Sources */,
 				1BB027FA219C2C9B0095F0E1 /* HomeController.swift in Sources */,
 				1BAEDABA21C8A0C500D97562 /* RegistrationViewModel.swift in Sources */,
 				1BDD1B6821A4823200FE80C8 /* CustomTextField.swift in Sources */,

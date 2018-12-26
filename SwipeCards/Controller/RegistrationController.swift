@@ -10,6 +10,20 @@ import UIKit
 import Firebase
 import JGProgressHUD
 
+extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[.originalImage] as? UIImage
+        registrationViewModel.bindableImage.value = image
+        dismiss(animated: true, completion: nil)
+    }
+ 
+}
+
 class RegistrationController: UIViewController {
     
     //MARK:- UI Components
@@ -23,6 +37,9 @@ class RegistrationController: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.heightAnchor.constraint(equalToConstant: 275).isActive = true
         button.layer.cornerRadius = 16
+        button.clipsToBounds = true
+        button.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
+        button.imageView?.contentMode = .scaleAspectFill
         button.clipsToBounds = true
         return button
     }()
@@ -93,6 +110,14 @@ class RegistrationController: UIViewController {
         }
     }
     
+    //MARK:- imagePicker
+    @objc fileprivate func handleSelectPhoto() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        present(imagePicker, animated: true, completion: nil)
+  
+    }
+    
     //MARK:- HUD
     fileprivate func showHUDWithError(error: Error) {
         let hud = JGProgressHUD(style: .dark)
@@ -103,7 +128,6 @@ class RegistrationController: UIViewController {
     }
     
     //MARK:- Keyboard observers
-    
     fileprivate func setupTapGesture() {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapDismiss)))
     }
@@ -153,7 +177,10 @@ class RegistrationController: UIViewController {
     let registrationViewModel = RegistrationViewModel()
     
     fileprivate func setupViewModelObserver() {
-        registrationViewModel.isFormValidObserver = { [unowned self] (isFormValid) in
+        
+        registrationViewModel.bindableIsFormValidObserver.bind { [unowned self] (isFormValid) in
+            guard let isFormValid = isFormValid else {return}
+            
             self.registerButton.isEnabled = isFormValid
             if isFormValid {
                 self.registerButton.backgroundColor = #colorLiteral(red: 0.8235294118, green: 0, blue: 0.3254901961, alpha: 1)
@@ -162,6 +189,9 @@ class RegistrationController: UIViewController {
                 self.registerButton.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
                 self.registerButton.setTitleColor(.darkGray, for: .normal)
             }
+        }
+        registrationViewModel.bindableImage.observer = {[unowned self] img in
+            self.selectPhotoButton.setImage(img?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
     }
     
